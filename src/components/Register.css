@@ -1,0 +1,32 @@
+.register-btn {
+  border: 1.5px solid black;
+  padding: 6px 6px 6px 1px;
+  border-radius: 5px;
+  background-color: darkslategrey;
+  cursor: pointer;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.register-icon {
+  width: 17px;
+  height: 17px;
+  margin-left: 10px;
+}
+
+.register-text {
+  color: white;
+  text-decoration: none;
+}
+
+@media (max-width: 767px) {
+  .register-icon {
+    display: none;
+  }
+
+  .register-btn {
+    padding: 4px 8px;
+    font-size: 10px;
+  }
+}

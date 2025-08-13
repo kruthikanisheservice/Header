@@ -1,21 +1,17 @@
-
+import logo from "../assets/LogoNish.jpg";
+import "./Logo.css";
 const Logo = () => {
   return (
-    <div style={{
-      display:"flex",alignItems:"center",gap:"10px"
+    <div className="logo"
+    style={{
+      display:"flex",alignItems:"center",gap:"10px",
+      
     }}>
-      <div
-        style={{
-          backgroundColor: "darkcyan",borderRadius: "50%",width: "35px",height: "35px"
-        }}
-      ></div>
-      <div
-        style={{
-          fontWeight: 'bold',color: 'black',
-        }}
-      >
-        Logo
-      </div>
+      <img src={logo} style={{
+        width:"30px",height:"30px",
+        border:"1px solid black",borderRadius:"50%",
+        
+      }} />
     </div>
   );
 };

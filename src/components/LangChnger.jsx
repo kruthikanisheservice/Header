@@ -1,37 +1,58 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
+import "./LangChang.css";
 
-const Lang = ({style}) => {
+const Lang = ({ style }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [selected, setSelected] = useState("English");
+  const dropdownRef = useRef(null);
+
+  const options = ["English", "Hindi", "Kannada", "Telugu", "Urdu"];
+
+  const handleSelect = (option) => {
+    setSelected(option);
+    setIsOpen(false);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
-    <div style={{
-      border: "1px solid black",
-      padding: "6px 12px",
-      borderRadius: "5px",
-      backgroundColor: "white",
-      display: "flex",
-      alignItems: "center",
-      height: "36px",
-      boxSizing: "border-box"
-    }}>
-      <select
-        style={{
-          backgroundColor: 'white',
-          color: 'black',
-          border: 'none', 
-          borderRadius: '5px',
-          padding: "6px 12px",
-          fontSize: '14px',
-          outline: 'none',
-          cursor: 'pointer'
-        }}
+    <div ref={dropdownRef} className="lang-container" style={style}>
+      
+      <div
+        className="lang-selected"
+        onClick={() => setIsOpen(!isOpen)}
       >
-        <option value="English">English</option>
-        <option value="Hindi">Hindi</option>
-        <option value="Kannada">Kannada</option>
-        <option value="Telugu">Telugu</option>
-        <option value="Urdu">Urdu</option>
-      </select>
+        {selected}
+        <span className="lang-arrow">{isOpen ? "▲" : "▼"}</span>
+      </div>
+
+      {isOpen && (
+        <div className="lang-dropdown">
+          {options.map((option) => (
+            <div
+              key={option}
+              onClick={() => handleSelect(option)}
+              className={`lang-option ${
+                option === selected ? "selected" : ""
+              }`}
+            >
+              {option}
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
-}
+};
 
 export default Lang;
